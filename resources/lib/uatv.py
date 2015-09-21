@@ -10,7 +10,7 @@ uatv.py - module with functions for watching Ukrainian TV Channels.
 Public functions:
 index() - opens main menu of the plugin.
 
-addChannel(name) - adds channel to the main menu of the plugin.
+add_channel(name) - adds channel to the main menu of the plugin.
 """
 
 __author__ = 'kharts'
@@ -25,7 +25,7 @@ def index():
     pass
 
 
-def addChannel(name):
+def add_channel(name):
     """
     Adds channel to the main menu of the plugin
     :param name: - name of channel
