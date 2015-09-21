@@ -10,3 +10,7 @@ default.py - main module of the plugin.
 """
 
 __author__ = 'kharts'
+
+import resources.lib.uatv as uatv
+
+uatv.index()
