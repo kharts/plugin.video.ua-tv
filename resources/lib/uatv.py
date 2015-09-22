@@ -20,9 +20,11 @@ import xbmcgui
 import xbmcplugin
 import xbmc
 import sys
+import os
 
 addon = xbmcaddon.Addon()
 addonID = addon.getAddonInfo('id')
+addonFolder = xbmc.translatePath('special://home/addons/'+addonID).decode('utf-8')
 channelsDB = {}
 pluginhandle = int(sys.argv[1])
 
@@ -35,19 +37,20 @@ def index():
     debug("index")
     for channel_id in channelsDB:
         channel = channelsDB[channel_id]
-        add_channel_to_menu(name=channel["name"])
+        add_channel_to_menu(name=channel["name"],
+                            icon=channel["icon"])
     xbmcplugin.addSortMethod(pluginhandle, xbmcplugin.SORT_METHOD_LABEL)
     xbmcplugin.endOfDirectory(pluginhandle)
 
 
-def add_channel_to_menu(name):
+def add_channel_to_menu(name, icon):
     """
     Adds channel to the main menu of the plugin
     :param name: - name of channel
     :return: None
     """
-
-    listItem = xbmcgui.ListItem(name)
+    iconImage = image_path(icon)
+    listItem = xbmcgui.ListItem(name, iconImage=iconImage)
     url = ""
     xbmcplugin.addDirectoryItem(handle=pluginhandle, url=url, listitem=listItem)
 
@@ -60,22 +63,29 @@ def update_channels_db():
     """
 
     add_channel_to_db(id="1stnational",
-                      name=translate(30001))
+                      name=translate(30001),
+                      icon="1stnational.jpg")
     add_channel_to_db(id="112channel",
-                      name=translate(30002))
+                      name=translate(30002),
+                      icon="112channel.png")
     add_channel_to_db(id="24channel",
-                      name=translate(30003))
+                      name=translate(30003),
+                      icon="24channel.png")
     add_channel_to_db(id="5channel",
-                      name=translate(30004))
+                      name=translate(30004),
+                      icon="5channel.png")
     add_channel_to_db(id="espresotv",
-                      name=translate(30005))
-    add_channel_to_db(id="gromadsketv",
-                      name=translate(30006))
+                      name=translate(30005),
+                      icon="espresotv.png")
+    add_channel_to_db(id="hromadsketv",
+                      name=translate(30006),
+                      icon="hromadsketv.jpg")
     add_channel_to_db(id="ubr",
-                      name=translate(30007))
+                      name=translate(30007),
+                      icon="ubr.png")
 
 
-def add_channel_to_db(id, name):
+def add_channel_to_db(id, name, icon):
     """
     Adds channel to channelsDB
     :param id: id channel's id
@@ -83,7 +93,7 @@ def add_channel_to_db(id, name):
     :return: None
     """
 
-    channelsDB[id] = {"name": name}
+    channelsDB[id] = {"name": name, "icon": icon}
 
 
 def translate(id):
@@ -121,6 +131,18 @@ def log(msg, level=xbmc.LOGNOTICE):
 
     log_message = u'{0}: {1}'.format(addonID, msg)
     xbmc.log(log_message.encode("utf-8"), level)
+
+
+def image_path(name):
+    """
+    Gets full path to image
+    :param name: short name of image
+    :return: full filename of image
+    """
+
+    resourcesFolder = os.path.join(addonFolder, "resources")
+    imagesFolder = os.path.join(resourcesFolder, "img")
+    return os.path.join(imagesFolder, name)
 
 
 update_channels_db()
