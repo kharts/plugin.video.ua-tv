@@ -36,6 +36,7 @@ def index():
     for channel_id in channelsDB:
         channel = channelsDB[channel_id]
         add_channel_to_menu(name=channel["name"])
+    xbmcplugin.addSortMethod(pluginhandle, xbmcplugin.SORT_METHOD_LABEL)
     xbmcplugin.endOfDirectory(pluginhandle)
 
 
@@ -60,6 +61,18 @@ def update_channels_db():
 
     add_channel_to_db(id="1stnational",
                       name=translate(30001))
+    add_channel_to_db(id="112channel",
+                      name=translate(30002))
+    add_channel_to_db(id="24channel",
+                      name=translate(30003))
+    add_channel_to_db(id="5channel",
+                      name=translate(30004))
+    add_channel_to_db(id="espresotv",
+                      name=translate(30005))
+    add_channel_to_db(id="gromadsketv",
+                      name=translate(30006))
+    add_channel_to_db(id="ubr",
+                      name=translate(30007))
 
 
 def add_channel_to_db(id, name):
