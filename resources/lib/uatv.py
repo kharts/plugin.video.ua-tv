@@ -7,10 +7,10 @@
 
 """
 uatv.py - module with functions for watching Ukrainian TV Channels.
-Public functions:
-index() - opens main menu of the plugin.
 
-add_channel_to_menu(name) - adds channel to the main menu of the plugin.
+Public functions:
+
+start() - starts plugin
 """
 
 __author__ = 'kharts'
@@ -23,7 +23,6 @@ import sys
 import os
 import urllib
 import urlparse
-import json
 
 addon = xbmcaddon.Addon()
 addonID = addon.getAddonInfo('id')
