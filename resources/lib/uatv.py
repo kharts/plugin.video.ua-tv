@@ -77,20 +77,25 @@ def open_channel(channel_id):
     """
 
     channel = channelsDB[channel_id]
-
     youtube_channel_id = channel["youtube_channel_id"]
-    if not youtube_channel_id:
-        username = channel["username"]
-        if not username:
-            debug("No channel id and username")
-            return
-        youtube_channel_id = get_channel_id_by_username(username)
+    video_id = channel["video_id"]
+    if not video_id:
         if not youtube_channel_id:
-            return
-    video_id = get_live_stream_id(youtube_channel_id)
+            username = channel["username"]
+            if not username:
+                debug("No channel id and username")
+                return
+            youtube_channel_id = get_channel_id_by_username(username)
+            if not youtube_channel_id:
+                return
+            else:
+                channel["youtube_channel_id"]=youtube_channel_id
+        video_id = get_live_stream_id(youtube_channel_id)
     if not video_id:
         error(translate(30010))
         return
+    else:
+        channel["video_id"] = video_id
     xbmc.Player().play("plugin://plugin.video.youtube/play/?video_id=" + video_id)
     #xbmc.executebuiltin("XBMC.PlayMedia(plugin://plugin.video.youtube/play/?video_id=" + video_id)
 
@@ -172,10 +177,10 @@ def update_channels_db():
     :return: None
     """
 
-    add_channel_to_db(id="1stnational",
-                      name=translate(30001),
-                      icon="1stnational.jpg",
-                      username="1tvUkraine")
+    # add_channel_to_db(id="1stnational",
+    #                   name=translate(30001),
+    #                   icon="1stnational.jpg",
+    #                   username="1tvUkraine")
     add_channel_to_db(id="112channel",
                       name=translate(30002),
                       icon="112channel.png",
@@ -209,20 +214,23 @@ def update_channels_db():
                       youtube_channel_id="UCw0yOBzjVydRjSVnXVIGt3w")
 
 
-def add_channel_to_db(id, name, icon, username="", youtube_channel_id=""):
+def add_channel_to_db(id, name, icon, username="", youtube_channel_id="", video_id=""):
     """
     Adds channel to channelsDB
     :param id: id channel's id
     :param name: name of channel (in local language)
     :param icon: filename of channel's logo
     :param username: YouTube username of channel
+    :param youtube_channel_id: id of YouTube channel
+    :param video_id: id of live stream of channel
     :return: None
     """
 
     channelsDB[id] = {"name": name,
                       "icon": icon,
                       "username": username,
-                      "youtube_channel_id": youtube_channel_id}
+                      "youtube_channel_id": youtube_channel_id,
+                      "video_id": video_id}
 
 
 def translate(id):
