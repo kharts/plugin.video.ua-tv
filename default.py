@@ -11,6 +11,16 @@ default.py - main module of the plugin.
 
 __author__ = 'kharts'
 
-import resources.lib.uatv as uatv
+import sys
+import os
 
-uatv.index()
+import xbmcaddon
+import xbmc
+
+#importing uatv module
+uatv_addon = xbmcaddon.Addon()
+uatv_path = uatv_addon.getAddonInfo("path")
+sys.path.append(xbmc.translatePath(os.path.join(uatv_path, "resources", "lib")))
+import uatv
+
+uatv.start()
