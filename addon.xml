@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.ua-tv" name="UA-TV" version="0.1.1" provider-name="kharts">
+<addon id="plugin.video.ua-tv" name="UA-TV" version="0.1.2" provider-name="kharts">
     <requires>
         <import addon="xbmc.python" version="2.1.0"></import>
         <import addon="plugin.video.youtube" version="5.1.8"></import>
@@ -9,11 +9,11 @@
     </extension>
     <extension point="xbmc.addon.metadata">
         <summary lang="en">Plugin for watching Ukrainian TV Channels</summary>
-        <description lang="en">Watch Ukrainian TV Channels (5 channel, Espreso TV, 24 channel, Hromadske TV, 112 channel, NewsOne, UBR) online directly from Kodi!</description>
+        <description lang="en">Watch Ukrainian TV Channels (5 channel, Espreso TV, 24 channel, Hromadske TV, 112 channel, ICTV, NewsOne, UBR) online directly from Kodi!</description>
         <summary lang="uk">Додаток для перегляду українських телеканалів</summary>
-        <description lang="uk">Дивіться українські телеканали (5 канал, Еспресо ТВ, 24 канал, Громадське телебачення, 112 канал, NewsOne, UBR) онлайн з Kodi!</description>
+        <description lang="uk">Дивіться українські телеканали (5 канал, Еспресо ТВ, 24 канал, Громадське телебачення, 112 канал, ICTV, NewsOne, UBR) онлайн з Kodi!</description>
         <summary lang="ru">Дополнение для просмотра украинских телеканалов</summary>
-        <description lang="ru">Смотрите украинские телеканалы (5 канал, Еспресо ТВ, 24 канал, Громадское телевидение, 112 канал, NewsOne, UBR) онлайн из Kodi!</description>
+        <description lang="ru">Смотрите украинские телеканалы (5 канал, Еспресо ТВ, 24 канал, Громадское телевидение, 112 канал, ICTV, NewsOne, UBR) онлайн из Kodi!</description>
         <disclaimer></disclaimer>
         <language>en uk ru</language>
         <platform>all</platform>

@@ -76,6 +76,20 @@ def open_channel(channel_id):
     """
 
     channel = channelsDB[channel_id]
+    channel_type = channel["type"]
+    if channel_type == "youtube":
+        open_youtube_channel(channel)
+    elif channel_type == "ictv":
+        open_ictv(channel)
+
+
+def open_youtube_channel(channel):
+    """
+    Opens youtube channel
+    :param channel: - channel to open (from channelsDB)
+    :return: None
+    """
+
     youtube_channel_id = channel["youtube_channel_id"]
     video_id = channel["video_id"]
     if not video_id:
@@ -96,7 +110,17 @@ def open_channel(channel_id):
     else:
         channel["video_id"] = video_id
     xbmc.Player().play("plugin://plugin.video.youtube/play/?video_id=" + video_id)
-    #xbmc.executebuiltin("XBMC.PlayMedia(plugin://plugin.video.youtube/play/?video_id=" + video_id)
+
+
+def open_ictv(channel):
+    """
+    Opens ICTV channel's live stream
+    :param channel: channel to open (from channelsDB)
+    :return: None
+    """
+
+    url = channel["url"]
+    xbmc.Player().play(url)
 
 
 def get_channel_id_by_username(username):
@@ -183,53 +207,78 @@ def update_channels_db():
     add_channel_to_db(id="112channel",
                       name=translate(30002),
                       icon="112channel.png",
+                      type="youtube",
                       username="",
                       youtube_channel_id="UC-l6fZMH7JLumIR-9o7xrQg")
     add_channel_to_db(id="24channel",
                       name=translate(30003),
                       icon="24channel.png",
+                      type="youtube",
                       username="news24ru")
     add_channel_to_db(id="5channel",
                       name=translate(30004),
                       icon="5channel.png",
+                      type="youtube",
                       username="5channel")
     add_channel_to_db(id="espresotv",
                       name=translate(30005),
                       icon="espresotv.png",
+                      type="youtube",
                       username="espresotv")
     add_channel_to_db(id="hromadsketv",
                       name=translate(30006),
                       icon="hromadsketv.jpg",
+                      type="youtube",
                       username="HromadskeTV")
+    add_channel_to_db(id="ictv",
+                      name="ICTV",
+                      icon="ictv.png",
+                      type="ictv",
+                      username="",
+                      youtube_channel_id="",
+                      video_id="",
+                      url="rtmp://stream.ictv.ua:80/live playpath=ictv.stream swfURL=http://ictv.ua/swfobject/zl_player.swf app=live pageURL=http://ictv.ua/ru/index/online")
     add_channel_to_db(id="newsone",
                       name=translate(30008),
                       icon="newsone.jpg",
+                      type="youtube",
                       username="",
                       youtube_channel_id="UC9oI0Du20oMOlzsLDTQGfug")
     add_channel_to_db(id="ubr",
                       name=translate(30007),
                       icon="ubr.png",
+                      type="youtube",
                       username="",
                       youtube_channel_id="UCw0yOBzjVydRjSVnXVIGt3w")
 
 
-def add_channel_to_db(id, name, icon, username="", youtube_channel_id="", video_id=""):
+def add_channel_to_db(id, name,
+                      icon,
+                      type="youtube",
+                      username="",
+                      youtube_channel_id="",
+                      video_id="",
+                      url=""):
     """
     Adds channel to channelsDB
     :param id: id channel's id
     :param name: name of channel (in local language)
     :param icon: filename of channel's logo
+    :param type: type of channel ("youtube" or "ictv")
     :param username: YouTube username of channel
     :param youtube_channel_id: id of YouTube channel
     :param video_id: id of live stream of channel
+    :param url: url of the stream
     :return: None
     """
 
     channelsDB[id] = {"name": name,
                       "icon": icon,
+                      "type": type,
                       "username": username,
                       "youtube_channel_id": youtube_channel_id,
-                      "video_id": video_id}
+                      "video_id": video_id,
+                      "url": url}
 
 
 def translate(id):
