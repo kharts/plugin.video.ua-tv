@@ -244,6 +244,12 @@ def update_channels_db():
                       type="youtube",
                       username="",
                       youtube_channel_id="UC9oI0Du20oMOlzsLDTQGfug")
+    add_channel_to_db(id="uatv",
+                      name="UA|TV",
+                      icon="uatv.jpg",
+                      type="youtube",
+                      username="",
+                      youtube_channel_id="UCt3igz3aIXfS108KV_jZsMA")
     add_channel_to_db(id="ubr",
                       name=translate(30007),
                       icon="ubr.png",
