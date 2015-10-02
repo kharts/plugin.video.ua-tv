@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.ua-tv" name="UA-TV" version="0.1.2" provider-name="kharts">
+<addon id="plugin.video.ua-tv" name="UA-TV" version="0.1.3" provider-name="kharts">
     <requires>
         <import addon="xbmc.python" version="2.1.0"></import>
         <import addon="plugin.video.youtube" version="5.1.8"></import>
