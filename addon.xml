@@ -8,8 +8,8 @@
         <provides>video</provides>
     </extension>
     <extension point="xbmc.addon.metadata">
-        <summary lang="en">Plugin for watching Ukrainian TV Channels</summary>
-        <description lang="en">Watch Ukrainian TV Channels (5 channel, Business TV, Espreso TV, 24 channel, Hromadske TV, 112 channel, ICTV, NewsOne, UA|TV, UBR, Ukraina, UKRLIFE.TV) online directly from Kodi!</description>
+        <summary lang="en">Plugin for watching Ukrainian TV channels</summary>
+        <description lang="en">Watch Ukrainian TV channels (5 channel, Business TV, Espreso TV, 24 channel, Hromadske TV, 112 channel, ICTV, NewsOne, UA|TV, UBR, Ukraina, UKRLIFE.TV) online directly from Kodi!</description>
         <summary lang="uk">Додаток для перегляду українських телеканалів</summary>
         <description lang="uk">Дивіться українські телеканали (5 канал, Business TV, Еспресо ТВ, 24 канал, Громадське телебачення, 112 канал, ICTV, NewsOne, UA|TV, UBR, Ukraina, UKRLIFE.TV) онлайн з Kodi!</description>
         <summary lang="ru">Дополнение для просмотра украинских телеканалов</summary>

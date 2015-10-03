@@ -1,5 +1,5 @@
 # UA-TV (Kodi/XBMC plugin) 
-UA-TV: Kodi/XBMC plugin for watching Ukrainian TV Channels.  
+UA-TV: Kodi/XBMC plugin for watching Ukrainian TV channels.
 Uses live streams from official pages of channels.  
 Supported channels:  
 - 5 channel
