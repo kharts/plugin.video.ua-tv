@@ -2,7 +2,8 @@
 UA-TV: Kodi/XBMC plugin for watching Ukrainian TV Channels.  
 Uses live streams from official pages of channels.  
 Supported channels:  
-- 5 channel  
+- 5 channel
+- Business TV
 - Espreso TV  
 - 24 channel  
 - Hromadske TV  
@@ -10,4 +11,6 @@ Supported channels:
 - ICTV  
 - NewsOne  
 - UA|TV  
-- UBR  
+- UBR
+- Ukraina
+- UKRLIFE.TV

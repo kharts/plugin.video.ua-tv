@@ -22,6 +22,7 @@ import xbmc
 import sys
 import os
 import urllib
+import urllib2
 import urlparse
 
 addon = xbmcaddon.Addon()
@@ -81,6 +82,8 @@ def open_channel(channel_id):
         open_youtube_channel(channel)
     elif channel_type == "ictv":
         open_ictv(channel)
+    elif channel_type == "ukraina":
+        open_ukraina(channel)
 
 
 def open_youtube_channel(channel):
@@ -122,6 +125,41 @@ def open_ictv(channel):
     url = channel["url"]
     xbmc.Player().play(url)
 
+
+def open_ukraina(channel):
+    """
+    Opens Ukraina channel's live stream
+    :param channel: channel to open (from channelsDB)
+    :return: None
+    """
+
+    url = channel["url"]
+    data = urllib2.urlopen(url)
+    #html = data.read()
+    #debug(html)
+    player_found = False
+    source_found = False
+    stream_url = ""
+    stream_found = False
+    for line in data:
+        if "new DSPlayer(" in line:
+            player_found = True
+        if player_found:
+            if "source:" in line:
+                source_found = True
+        if source_found:
+            start_url = line.find("http://")
+            if start_url >= 0:
+                stream_found = True
+                stream_url = line[start_url:]
+                end_url = stream_url.find("',")
+                if end_url >= 0:
+                    stream_url = stream_url[:end_url]
+                break
+    if stream_found:
+        xbmc.Player().play(stream_url)
+    else:
+        error(translate(30010))
 
 def get_channel_id_by_username(username):
     """
@@ -220,6 +258,12 @@ def update_channels_db():
                       icon="5channel.png",
                       type="youtube",
                       username="5channel")
+    add_channel_to_db(id="businesstv",
+                      name="Business TV",
+                      icon="businesstv.png",
+                      type="youtube",
+                      username="",
+                      youtube_channel_id="UCcnhIV7OAUN8kfgYER9GBUA")
     add_channel_to_db(id="espresotv",
                       name=translate(30005),
                       icon="espresotv.png",
@@ -250,6 +294,18 @@ def update_channels_db():
                       type="youtube",
                       username="",
                       youtube_channel_id="UCt3igz3aIXfS108KV_jZsMA")
+    add_channel_to_db(id="ukraina",
+                      name=translate(30011),
+                      icon="ukraina.jpg",
+                      type="ukraina",
+                      username="",
+                      youtube_channel_id="",
+                      url="http://kanalukraina.tv/online/")
+    add_channel_to_db(id="ukrlifetv",
+                      name="UKRLIFE.TV",
+                      icon="ukrlifetv.png",
+                      type="youtube",
+                      username="TVUKRLIFE")
     add_channel_to_db(id="ubr",
                       name=translate(30007),
                       icon="ubr.png",
@@ -303,7 +359,11 @@ def debug(content):
     :param content: content which should be output
     :return: None
     """
-    log(unicode(content), xbmc.LOGDEBUG)
+    if type(content) is str:
+        message = unicode(content, "utf-8")
+    else:
+        message = content
+    log(message, xbmc.LOGDEBUG)
 
 def log(msg, level=xbmc.LOGNOTICE):
     """
